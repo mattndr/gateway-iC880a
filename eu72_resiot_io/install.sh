@@ -83,7 +83,8 @@ fi
 
 # Build LoRa gateway app
 if [ ! -d lora_gateway ]; then
-    git clone https://github.com/resiot/lora_gateway
+    #git clone https://github.com/resiot/lora_gateway
+    git clone https://github.com/Lora-net/lora_gateway
     pushd lora_gateway
 else
     pushd lora_gateway
@@ -99,7 +100,8 @@ popd
 
 # Build packet forwarder
 if [ ! -d ic880a_packet_forwarder ]; then
-    git clone https://github.com/resiot/ic880a_packet_forwarder
+    #git clone https://github.com/resiot/ic880a_packet_forwarder
+    git clone https://github.com/Lora-net/packet_forwarder
     pushd ic880a_packet_forwarder
 else
     pushd ic880a_packet_forwarder
