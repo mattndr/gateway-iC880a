@@ -35,9 +35,9 @@ GATEWAY_EUI=${GATEWAY_EUI^^} # toupper
 
 echo "Detected EUI $GATEWAY_EUI from $GATEWAY_EUI_NIC"
 
-printf "Host name [resiot-gateway]:"
+printf "Host name [lora-gateway-1]:"
 read NEW_HOSTNAME
-if [[ $NEW_HOSTNAME == "" ]]; then NEW_HOSTNAME="resiot-gateway"; fi
+if [[ $NEW_HOSTNAME == "" ]]; then NEW_HOSTNAME="lora-gateway-1"; fi
 
 printf "Descriptive name [resiot-ic880a]:"
 read GATEWAY_NAME
@@ -99,12 +99,11 @@ make
 popd
 
 # Build packet forwarder
-if [ ! -d ic880a_packet_forwarder ]; then
-    #git clone https://github.com/resiot/ic880a_packet_forwarder
+if [ ! -d packet_forwarder ]; then
     git clone https://github.com/Lora-net/packet_forwarder
-    pushd ic880a_packet_forwarder
+    pushd packet_forwarder
 else
-    pushd ic880a_packet_forwarder
+    pushd packet_forwarder
     git pull
     git reset --hard
 fi
@@ -115,8 +114,8 @@ popd
 
 # Symlink poly packet forwarder
 if [ ! -d bin ]; then mkdir bin; fi
-if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
-ln -s $INSTALL_DIR/ic880a_packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/resiot_pkt_fwd
+if [ -f ./bin/lora_pkt_fwd ]; then rm ./bin/lora_pkt_fwd; fi
+ln -s $INSTALL_DIR/packet_forwarder/lora_pkt_fwd/lora_pkt_fwd ./bin/resiot_pkt_fwd
 
 LOCAL_CONFIG_FILE=$INSTALL_DIR/bin/local_conf.json
 
